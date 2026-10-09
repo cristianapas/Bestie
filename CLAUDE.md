@@ -1,6 +1,6 @@
 # prinny-client
 
-Cinny Matrix client packaged as a desktop app via Tauri v2. Cross-compiles to Windows from Linux using the GNU toolchain.
+Prinny Matrix client packaged as a desktop app via Tauri v2. Cross-compiles to Windows from Linux using the GNU toolchain.
 
 **Repos:**
 - Desktop shell: `coffeegrind123/prinny-client` (this repo)
@@ -636,7 +636,7 @@ JS: startForegroundService()
   → plugin:foreground|start_foreground
   → ForegroundServicePlugin.kt (Tauri plugin)
   → ForegroundService.kt (Android Service with startForeground())
-  → Persistent notification "Cinny - Connected to Matrix"
+  → Persistent notification "Prinny - Connected to Matrix"
 ```
 
 **Startup:** The foreground service starts automatically in `useUnifiedPush.ts` when the Matrix client connects. On cleanup (client stop), it stops the service.
@@ -651,7 +651,7 @@ JS: startForegroundService()
 |------|------|
 | `ForegroundService.kt` | Android Service, creates notification channel, calls `startForeground()` |
 | `ForegroundServicePlugin.kt` | Tauri plugin with `startForeground`/`stopForeground`/`isForegroundRunning` commands |
-| `ForegroundService.kt` notification channel | `cinny_foreground`, IMPORTANCE_LOW, no badge |
+| `ForegroundService.kt` notification channel | `prinny_foreground`, IMPORTANCE_LOW, no badge |
 
 **To disable:** Remove `await startForegroundService()` from `useUnifiedPush.ts:67`. Users with FCM don't need it.
 
@@ -803,8 +803,8 @@ consumers.
    shortcut, so a shortcut lost to an MSI reinstall takes desktop
    notifications with it and reports no error anywhere.
 2. **The MSI was never rebranded.** `src-tauri/wix/banner.bmp` and
-   `dialogImage.bmp` are still upstream Cinny artwork — blue `#2A62A6` and the
-   Cinny bird — so anyone who installed the `.msi` got a Cinny-branded
+   `dialogImage.bmp` are still upstream Prinny artwork — blue `#2A62A6` and the
+   Prinny bird — so anyone who installed the `.msi` got a Prinny-branded
    installer for a product called Prinny.
 3. It cost a WiX toolchain download plus an extra bundle pass on every Windows
    build.

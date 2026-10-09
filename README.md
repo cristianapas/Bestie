@@ -4,7 +4,7 @@
 [![Latest](https://img.shields.io/github/v/release/coffeegrind123/prinny-client?label=latest)](https://github.com/coffeegrind123/prinny-client/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/coffeegrind123/prinny-client/total?label=downloads)](https://github.com/coffeegrind123/prinny-client/releases)
 
-A Matrix chat client that actually feels native. Prinny Client is [Cinny](https://cinny.in) packaged with [Tauri v2](https://v2.tauri.app), shipping on Windows, macOS, Linux, and Android. Hard fork of [cinnyapp/cinny-desktop](https://github.com/cinnyapp/cinny-desktop). The frontend lives at [coffeegrind123/prinny](https://github.com/coffeegrind123/prinny) on the `main` branch.
+A Matrix chat client that actually feels native. Prinny Client is [Prinny](https://cinny.in) packaged with [Tauri v2](https://v2.tauri.app), shipping on Windows, macOS, Linux, and Android. Hard fork of [cinnyapp/cinny-desktop](https://github.com/cinnyapp/cinny-desktop). The frontend lives at [coffeegrind123/prinny](https://github.com/coffeegrind123/prinny) on the `main` branch.
 
 ## Download
 
@@ -54,7 +54,7 @@ The `webapp-release` branch ships its own `nginx.conf` and `README.md` covering 
 
 ## Features
 
-Everything below is what this fork adds on top of upstream [Cinny](https://cinny.in). Cinny itself already has a markdown editor, message layouts, slash commands, themes, quick switcher, and standard Matrix client features. These are the additions.
+Everything below is what this fork adds on top of upstream [Prinny](https://cinny.in). Prinny itself already has a markdown editor, message layouts, slash commands, themes, quick switcher, and standard Matrix client features. These are the additions.
 
 ### Desktop notifications
 
@@ -83,7 +83,7 @@ Everything below is what this fork adds on top of upstream [Cinny](https://cinny
 | Reply highlights | Yellow left border + amber background when someone replies to your message |
 | Timestamp position | Discord-style: timestamp next to username, `@user:server` on right only on hover (Modern layout) |
 | NEW badge | Right-aligned green "NEW" badge with full-width green line divider (Discord-style) |
-| Read receipts | Two modes (Settings → General → Read Receipt Style): Cinny default shows "is following the conversation" text live, Element-style shows tiny avatar dots at each person's last-read position |
+| Read receipts | Two modes (Settings → General → Read Receipt Style): Prinny default shows "is following the conversation" text live, Element-style shows tiny avatar dots at each person's last-read position |
 | Mark as Unread | Right-click any message → sets read marker to previous event. Room gets unread badge, green NEW line at marked position |
 
 ### Sidebar and navigation
@@ -143,7 +143,7 @@ Everything below is what this fork adds on top of upstream [Cinny](https://cinny
 | Feature | Description |
 |---------|-------------|
 | Prinny panic face | All 17 desktop icons (ICO, PNG, ICNS), favicon SVGs replaced |
-| Build-time rename | `scripts/rename-prinny.mjs` via `beforeBuildCommand`: Cinny→Prinny across all source (Rust, Kotlin, TSX, JSON, XML, HTML, SVG) |
+| Build-time rename | `scripts/rename-prinny.mjs` via `beforeBuildCommand`: Prinny→Prinny across all source (Rust, Kotlin, TSX, JSON, XML, HTML, SVG) |
 | Android package | `in.prinny.app` — directory, namespace, applicationId, Kotlin packages all consistent |
 | About page | 96px Prinny logo, dynamic version from `package.json`, links to our repos |
 | Release assets | All CI artifacts named `Prinny_desktop-*` / `prinny-android-*` |

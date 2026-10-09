@@ -49,10 +49,10 @@
         "depends": []
       }
     },
-    "createUpdaterArtifacts": "v1Compatible"
+    "createUpdaterArtifacts": false
   },
   "build": {
-    "beforeBuildCommand": "node scripts/check-secrets-perms.mjs && node scripts/bump-version.mjs && node scripts/rename-prinny.mjs && cd cinny && npm run build",
+    "beforeBuildCommand": "node scripts/check-secrets-perms.mjs && node scripts/bump-version.mjs && node scripts/rename-prinny.mjs && node scripts/patch-all-translations.mjs && cd cinny && npm run build",
     "frontendDist": "../cinny/dist",
     "beforeDevCommand": "cd cinny && npm start",
     "devUrl": "http://localhost:8080"
@@ -64,9 +64,7 @@
   "plugins": {
     "updater": {
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDdGMzdFQTU4RjY0NkMyNjAKUldSZ3drYjJXT28zZnlkR2VrcnVIUDc1dmZaYXBFc21PQkduNUtIRENXMEhRTzFXVWhPWmdMMUYK",
-      "endpoints": [
-        "https://github.com/coffeegrind123/prinny-client/releases/download/tauri/release.json"
-      ]
+      "endpoints": []
     },
     "deep-link": {
       "desktop": {

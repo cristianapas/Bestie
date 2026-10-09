@@ -65,7 +65,7 @@ Everything else is enumerated below by area.
 | Report room / report user | `ReportRoomDialog.tsx`, user-info report | — | missing |
 | Bulk redact ("remove recent messages" for a user) | `BulkRedactDialog.tsx` | — | missing (moderation) |
 | View source | yes | yes | parity |
-| Read receipts | avatar row | both styles (ours has a Cinny/Element toggle) | **ours is ahead** |
+| Read receipts | avatar row | both styles (ours has a Prinny/Element toggle) | **ours is ahead** |
 | Chat effects (`/confetti`, snowfall, fireworks, hearts, rainfall, spaceinvaders) | `effects/` | — | missing (fun, cheap) |
 | Big emoji, autoplay gif/video toggles, code line numbers, syntax highlight detection | settings toggles | partially (media autoload) | minor |
 | Jump to date (MSC3030) | labs `feature_jump_to_date` | shipped: `features/room/jump-to-time/` | **ours is ahead** |

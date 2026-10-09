@@ -189,7 +189,8 @@ class MainActivity : TauriActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
-        UpdateChecker(this).check()
+        // Update check disabled
+        // UpdateChecker(this).check()
 
         // Tauri creates the WebView during super.onCreate via JNI. Hook
         // the chrome client on the next post so the view hierarchy is

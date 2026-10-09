@@ -1620,7 +1620,7 @@ pub fn run() {
 
             #[cfg(not(mobile))]
             {
-                window_builder = window_builder.title("Cinny");
+                window_builder = window_builder.title("Prinny");
             }
 
             #[cfg(not(mobile))]

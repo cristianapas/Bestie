@@ -189,7 +189,7 @@ class ForegroundService : Service() {
                 "Background service",
                 NotificationManager.IMPORTANCE_LOW // visible icon, no sound — appropriate for IM
             ).apply {
-                description = "Shown when Cinny keeps the Matrix connection alive. " +
+                description = "Shown when Prinny keeps the Matrix connection alive. " +
                     "Disable this channel in system settings to hide the notification."
                 setShowBadge(false)
             }
@@ -210,7 +210,7 @@ class ForegroundService : Service() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val n = Notification.Builder(this, CHANNEL_ID)
-                .setContentTitle("Cinny")
+                .setContentTitle("Prinny")
                 .setContentText("Connected to Matrix")
                 .setSmallIcon(android.R.drawable.ic_dialog_info)
                 .setOngoing(true)
@@ -223,7 +223,7 @@ class ForegroundService : Service() {
         } else {
             @Suppress("DEPRECATION")
             val n = Notification.Builder(this)
-                .setContentTitle("Cinny")
+                .setContentTitle("Prinny")
                 .setContentText("Connected to Matrix")
                 .setSmallIcon(android.R.drawable.ic_dialog_info)
                 .setOngoing(true)

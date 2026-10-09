@@ -192,7 +192,7 @@ class UpdateChecker(private val context: Context) {
         return false
     }
 
-    private fun apkName(version: String): String = "cinny-v$version.apk"
+    private fun apkName(version: String): String = "prinny-v$version.apk"
 
     /**
      * Staging directory for the update APK: app-private external storage
@@ -359,7 +359,7 @@ class UpdateChecker(private val context: Context) {
         if (file.exists() && file.length() == 0L) file.delete()
 
         val request = DownloadManager.Request(parsed)
-            .setTitle("Cinny v$version")
+            .setTitle("Prinny v$version")
             .setDescription("Downloading update...")
             .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
             // App-private external files dir — see apkDir(). The public

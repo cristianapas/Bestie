@@ -1,6 +1,7 @@
 {
-  "defaultHomeserver": 1,
+  "defaultHomeserver": 0,
   "homeserverList": [
+    "chat.mpba.gov.ar",
     "converser.eu",
     "matrix.org",
     "mozilla.org",
