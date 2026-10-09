@@ -123,7 +123,7 @@ mod imp {
                     "id": "1045800378228281345",
                     "username": "prinny",
                     "discriminator": "0",
-                    "global_name": "Prinny",
+                    "global_name": "Bestie",
                     "avatar": null,
                     "avatar_decoration_data": null,
                     "bot": false,

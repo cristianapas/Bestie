@@ -1,22 +1,18 @@
-# Prinny Client <img align="right" width="90" height="128" src="src-tauri/icons/prinny-logo.png" alt="Prinny" />
+# Bestie Client <img align="right" width="100" height="100" src="src-tauri/icons/bestie-logo.png" alt="Bestie" />
 
-[![Build](https://github.com/coffeegrind123/prinny-client/actions/workflows/build.yml/badge.svg)](https://github.com/coffeegrind123/prinny-client/actions/workflows/build.yml)
-[![Latest](https://img.shields.io/github/v/release/coffeegrind123/prinny-client?label=latest)](https://github.com/coffeegrind123/prinny-client/releases/latest)
-[![Downloads](https://img.shields.io/github/downloads/coffeegrind123/prinny-client/total?label=downloads)](https://github.com/coffeegrind123/prinny-client/releases)
+[![Build](https://github.com/cristianapas/Bestie/actions/workflows/build.yml/badge.svg)](https://github.com/cristianapas/Bestie/actions/workflows/build.yml)
+[![Latest](https://img.shields.io/github/v/release/cristianapas/Bestie?label=latest)](https://github.com/cristianapas/Bestie/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/cristianapas/Bestie/total?label=downloads)](https://github.com/cristianapas/Bestie/releases)
 
-A Matrix chat client that actually feels native. Prinny Client is [Prinny](https://cinny.in) packaged with [Tauri v2](https://v2.tauri.app), shipping on Windows, macOS, Linux, and Android. Hard fork of [cinnyapp/cinny-desktop](https://github.com/cinnyapp/cinny-desktop). The frontend lives at [coffeegrind123/prinny](https://github.com/coffeegrind123/prinny) on the `main` branch.
+Cliente Matrix rápido, moderno y amigable, con servidor por defecto `chat.mpba.gov.ar` y soporte completo en español.
 
-## Download
+## Descarga
 
-Everything is on [GitHub Releases](https://github.com/coffeegrind123/prinny-client/releases).
+Todos los instaladores y versiones están disponibles en [GitHub Releases](https://github.com/cristianapas/Bestie/releases).
 
-| Platform | Download |
-|----------|----------|
-| Windows | [Setup](https://github.com/coffeegrind123/prinny-client/releases/latest/download/Prinny_desktop-x86_64-setup.exe) |
-| macOS | [DMG](https://github.com/coffeegrind123/prinny-client/releases/latest/download/Prinny_desktop-universal.dmg) |
-| Linux | [AppImage](https://github.com/coffeegrind123/prinny-client/releases/latest/download/Prinny_desktop-x86_64.AppImage) · [deb](https://github.com/coffeegrind123/prinny-client/releases/latest/download/Prinny_desktop-x86_64.deb) |
-| Android | [APK](https://github.com/coffeegrind123/prinny-client/releases/latest/download/prinny-android-universal.apk) (sideload) |
-| Web | [prinny.app/app](https://prinny.app/app/) (hosted) · [zip](https://github.com/coffeegrind123/prinny-client/releases/latest/download/prinny-webapp.zip) · [git self-host](#self-host-web) |
+| Plataforma | Descarga |
+|------------|----------|
+| Windows | [Bestie_4.11.11_x64-setup.exe](https://github.com/cristianapas/Bestie/releases/latest/download/Bestie_4.11.11_x64-setup.exe) |
 
 There is one Windows installer on purpose. Windows ties toast notifications and the
 taskbar button to the AppUserModelID carried by the Start Menu shortcut, so a build
@@ -35,11 +31,11 @@ Desktop builds update themselves via `release.json`. Android checks on launch an
 
 Two ways, pick whichever matches how you deploy.
 
-**Option A — Tagged zip.** Grab `prinny-webapp.zip` from the [latest release](https://github.com/coffeegrind123/prinny-client/releases/latest), unzip somewhere your webserver serves, point at the `dist/` directory inside. One-shot upload; re-download on each release.
+**Option A — Tagged zip.** Grab `prinny-webapp.zip` from the [latest release](https://github.com/cristianapas/Bestie/releases/latest), unzip somewhere your webserver serves, point at the `dist/` directory inside. One-shot upload; re-download on each release.
 
 ```bash
 curl -L -o prinny-webapp.zip \
-  https://github.com/coffeegrind123/prinny-client/releases/latest/download/prinny-webapp.zip
+  https://github.com/cristianapas/Bestie/releases/latest/download/prinny-webapp.zip
 unzip prinny-webapp.zip -d /usr/share/webapps/prinny   # extracts to /usr/share/webapps/prinny/dist
 ```
 
@@ -54,7 +50,7 @@ The `webapp-release` branch ships its own `nginx.conf` and `README.md` covering 
 
 ## Features
 
-Everything below is what this fork adds on top of upstream [Prinny](https://cinny.in). Prinny itself already has a markdown editor, message layouts, slash commands, themes, quick switcher, and standard Matrix client features. These are the additions.
+Everything below is what this fork adds on top of upstream [Bestie](https://cinny.in). Bestie itself already has a markdown editor, message layouts, slash commands, themes, quick switcher, and standard Matrix client features. These are the additions.
 
 ### Desktop notifications
 
@@ -83,7 +79,7 @@ Everything below is what this fork adds on top of upstream [Prinny](https://cinn
 | Reply highlights | Yellow left border + amber background when someone replies to your message |
 | Timestamp position | Discord-style: timestamp next to username, `@user:server` on right only on hover (Modern layout) |
 | NEW badge | Right-aligned green "NEW" badge with full-width green line divider (Discord-style) |
-| Read receipts | Two modes (Settings → General → Read Receipt Style): Prinny default shows "is following the conversation" text live, Element-style shows tiny avatar dots at each person's last-read position |
+| Read receipts | Two modes (Settings → General → Read Receipt Style): Bestie default shows "is following the conversation" text live, Element-style shows tiny avatar dots at each person's last-read position |
 | Mark as Unread | Right-click any message → sets read marker to previous event. Room gets unread badge, green NEW line at marked position |
 
 ### Sidebar and navigation
@@ -142,10 +138,10 @@ Everything below is what this fork adds on top of upstream [Prinny](https://cinn
 
 | Feature | Description |
 |---------|-------------|
-| Prinny panic face | All 17 desktop icons (ICO, PNG, ICNS), favicon SVGs replaced |
-| Build-time rename | `scripts/rename-prinny.mjs` via `beforeBuildCommand`: Prinny→Prinny across all source (Rust, Kotlin, TSX, JSON, XML, HTML, SVG) |
+| Bestie panic face | All 17 desktop icons (ICO, PNG, ICNS), favicon SVGs replaced |
+| Build-time rename | `scripts/rename-prinny.mjs` via `beforeBuildCommand`: Bestie→Bestie across all source (Rust, Kotlin, TSX, JSON, XML, HTML, SVG) |
 | Android package | `in.prinny.app` — directory, namespace, applicationId, Kotlin packages all consistent |
-| About page | 96px Prinny logo, dynamic version from `package.json`, links to our repos |
+| About page | 96px Bestie logo, dynamic version from `package.json`, links to our repos |
 | Release assets | All CI artifacts named `Prinny_desktop-*` / `prinny-android-*` |
 
 ### Build and CI
@@ -163,7 +159,7 @@ Everything below is what this fork adds on top of upstream [Prinny](https://cinn
 You need Rust, Node.js 16+, and platform dev tools. Clone with submodules:
 
 ```bash
-git clone --recursive https://github.com/coffeegrind123/prinny-client.git
+git clone --recursive https://github.com/cristianapas/Bestie.git
 cd prinny-client
 cd cinny && git checkout main && npm ci && cd ..
 npm ci

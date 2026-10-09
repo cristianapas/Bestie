@@ -31,7 +31,7 @@
     "servers": []
   },
 
-  "publicServersUrl": "https://prinny.app/api/servers.json",
+  "publicServersUrl": "https://cinny.in/api/servers.json",
 
   "hashRouter": {
     "enabled": true,

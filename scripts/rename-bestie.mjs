@@ -1,10 +1,8 @@
 /**
- * Pre-build: rename Cinny → Prinny across the entire project.
+ * Pre-build: rename Cinny / Prinny → Bestie across the entire project.
  *
  * Runs as beforeBuildCommand. Modifies source in-place so the Tauri build
- * compiles with "Prinny" branding. Also renames Android package directory.
- *
- * Revert:  git checkout -- . && cd cinny && git checkout -- .
+ * compiles with "Bestie" branding. Also renames Android package directory.
  */
 import { readFileSync, writeFileSync, readdirSync, existsSync, renameSync, unlinkSync } from 'node:fs';
 import { join, extname, relative, dirname } from 'node:path';
@@ -30,19 +28,25 @@ const SKIP_DIRS = new Set([
 
 const SKIP_FILES = new Set([
   'accountData.ts', // Matrix protocol constant
-  'About.tsx',      // Credits must credit upstream Cinny, not Prinny
+  'About.tsx',      // Handled cleanly by patch-all-translations
 ]);
 
 // ── Phase 0: rename Android package directory ──────────────────────
 
 function renameAndroidPackageDir() {
   const javaRoot = join(ROOT, 'src-tauri', 'gen', 'android', 'app', 'src', 'main', 'java', 'in');
-  const oldDir = join(javaRoot, 'cinny');
-  const newDir = join(javaRoot, 'prinny');
-  if (existsSync(oldDir) && !existsSync(newDir)) {
-    renameSync(oldDir, newDir);
-    console.log(`  [dir] in/cinny → in/prinny`);
+  const oldDirCinny = join(javaRoot, 'cinny');
+  const oldDirPrinny = join(javaRoot, 'prinny');
+  const newDir = join(javaRoot, 'bestie');
+  
+  if (existsSync(oldDirCinny) && !existsSync(newDir)) {
+    renameSync(oldDirCinny, newDir);
+    console.log(`  [dir] in/cinny → in/bestie`);
+  } else if (existsSync(oldDirPrinny) && !existsSync(newDir)) {
+    renameSync(oldDirPrinny, newDir);
+    console.log(`  [dir] in/prinny → in/bestie`);
   }
+  
   // Remove stale assets tauri.conf.json so it's regenerated fresh
   const staleAssets = join(ROOT, 'src-tauri', 'gen', 'android', 'app', 'src', 'main', 'assets', 'tauri.conf.json');
   if (existsSync(staleAssets)) {
@@ -61,35 +65,29 @@ function replaceInFile(filePath) {
 
     // Repo URLs
     content = content.replace(
-      /coffeegrind123\/cinny-desktop/g,
-      'coffeegrind123/prinny-client'
+      /(coffeegrind123\/cinny-desktop|coffeegrind123\/prinny-client|cristianapas\/prinny-client)/g,
+      'cristianapas/Bestie'
     );
 
-    // Android package identifier stays as in.cinny.app in config files
-    // because Tauri CLI reads it before beforeBuildCommand runs.
-    // Only user-facing strings (app_name, notifications) are renamed.
-    // NOTE: do NOT rename identifier in tauri.conf.json or
-    // namespace/applicationId in build.gradle.kts.
-
     // Android notification channel IDs
-    content = content.replace(/\bcinny_foreground\b/g, 'prinny_foreground');
-    content = content.replace(/\bcinny_messages\b/g, 'prinny_messages');
+    content = content.replace(/\b(cinny|prinny)_foreground\b/g, 'bestie_foreground');
+    content = content.replace(/\b(cinny|prinny)_messages\b/g, 'bestie_messages');
 
     // Android theme
-    content = content.replace(/Theme\.cinny\b/g, 'Theme.prinny');
+    content = content.replace(/Theme\.(cinny|prinny)\b/g, 'Theme.bestie');
 
     // Kotlin APK filename
-    content = content.replace(/"cinny-v\$/g, '"prinny-v$');
+    content = content.replace(/"(cinny|prinny)-v\$/g, '"bestie-v$');
 
     // Tauri config
-    content = content.replace(/"productName"\s*:\s*"Cinny"/g, '"productName": "Prinny"');
-    content = content.replace(/"mainBinaryName"\s*:\s*"cinny"/g, '"mainBinaryName": "prinny"');
+    content = content.replace(/"productName"\s*:\s*"(Cinny|Prinny)"/g, '"productName": "Bestie"');
+    content = content.replace(/"mainBinaryName"\s*:\s*"(cinny|prinny)"/g, '"mainBinaryName": "bestie"');
 
-    // General case-sensitive — title case and all caps only.
-    // Lowercase "cinny" is NOT blanket-replaced because it appears
-    // in directory paths (cd cinny, ../cinny/dist).
-    content = content.replace(/\bCinny\b/g, 'Prinny');
-    content = content.replace(/\bCINNY\b/g, 'PRINNY');
+    // General case-sensitive replacements
+    content = content.replace(/\bPrinny\b/g, 'Bestie');
+    content = content.replace(/\bPRINNY\b/g, 'BESTIE');
+    content = content.replace(/\bCinny\b/g, 'Bestie');
+    content = content.replace(/\bCINNY\b/g, 'BESTIE');
 
     if (content !== original) {
       writeFileSync(filePath, content, 'utf8');
@@ -128,7 +126,7 @@ function walk(dir) {
 
 // ── Main ────────────────────────────────────────────────────────────
 
-console.log('[prinny] Renaming Cinny → Prinny...');
+console.log('[bestie] Renaming to Bestie...');
 renameAndroidPackageDir();
 const changed = walk(ROOT);
-console.log(`[prinny] Done — ${changed} files changed.`);
+console.log(`[bestie] Done — ${changed} files changed.`);

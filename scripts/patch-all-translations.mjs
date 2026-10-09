@@ -1,7 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const REPO_ROOT = 'C:/repo/prinny-client';
+const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const FRONTEND_DIR = path.join(REPO_ROOT, 'cinny');
 
 console.log('🚀 Iniciando parche integral, completo e idempotente de traducciones i18n...');
@@ -628,7 +629,8 @@ Object.assign(esFeatures.settings.about, {
   update_to_version: 'Actualizar a v{{version}}',
   up_to_date: 'Actualizado',
   retry_update_check: 'Reintentar comprobación',
-  prinny_is_hard_fork: 'Prinny Client es un fork de',
+  prinny_is_hard_fork: 'Bestie Client es un fork de',
+  bestie_is_hard_fork: 'Bestie Client es un fork de',
   and: 'y',
   packaged_with: ', empaquetado con',
   the_font: 'La fuente',
@@ -1051,7 +1053,7 @@ patchFile(path.join(FRONTEND_DIR, 'src', 'app', 'features', 'settings', 'about',
   ),
   (code) => code.replace('const updateAction = updateButton(status, update);', 'const updateAction = updateButton(status, update, t);'),
   (code) => {
-    const oldCreditsBlock = /<Box\s+as="ul"[\s\S]*?<li>[\s\S]*?Prinny Client is a hard fork of[\s\S]*?<\/Box>/;
+    const oldCreditsBlock = /<Box\s+as="ul"[\s\S]*?<li>[\s\S]*?(?:Prinny|Bestie|Cinny) Client (?:is a hard fork of|es un fork de)[\s\S]*?<\/Box>/;
     const newCreditsBlock = `<Box
                       as="ul"
                       direction="Column"
@@ -1063,7 +1065,7 @@ patchFile(path.join(FRONTEND_DIR, 'src', 'app', 'features', 'settings', 'about',
                     >
                       <li>
                         <Text size="T300">
-                          {t('features:settings.about.prinny_is_hard_fork', { defaultValue: 'Prinny Client es un fork de' })}{' '}
+                          {t('features:settings.about.bestie_is_hard_fork', { defaultValue: 'Bestie Client es un fork de' })}{' '}
                           <a
                             href="https://github.com/cinnyapp/cinny"
                             rel="noreferrer noopener"

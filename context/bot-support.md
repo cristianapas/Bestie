@@ -1,6 +1,6 @@
 # Telegram-style bot support
 
-Prinny renders `app.prinny.bot.*` — bot command menus, inline keyboards with
+Bestie renders `app.prinny.bot.*` — bot command menus, inline keyboards with
 callback queries, reply keyboards and force-reply prompts.
 
 The protocol is specified in **`spec/app.prinny.bot.md`** in

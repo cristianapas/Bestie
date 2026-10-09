@@ -32,7 +32,7 @@
     ],
     "resources": [],
     "externalBin": [],
-    "copyright": "Prinny - AGPL-3.0-only",
+    "copyright": "Bestie - AGPL-3.0-only",
     "category": "SocialNetworking",
     "shortDescription": "Yet another matrix client",
     "longDescription": "",
@@ -52,15 +52,15 @@
     "createUpdaterArtifacts": false
   },
   "build": {
-    "beforeBuildCommand": "node scripts/check-secrets-perms.mjs && node scripts/bump-version.mjs && node scripts/rename-prinny.mjs && node scripts/patch-all-translations.mjs && cd cinny && npm run build",
+    "beforeBuildCommand": "node scripts/check-secrets-perms.mjs && node scripts/bump-version.mjs && node scripts/rename-bestie.mjs && node scripts/patch-all-translations.mjs && cd cinny && npm run build",
     "frontendDist": "../cinny/dist",
     "beforeDevCommand": "cd cinny && npm start",
     "devUrl": "http://localhost:8080"
   },
-  "productName": "Prinny",
-  "mainBinaryName": "prinny",
+  "productName": "Bestie",
+  "mainBinaryName": "bestie",
   "version": "4.11.11",
-  "identifier": "in.prinny.app",
+  "identifier": "in.bestie.app",
   "plugins": {
     "updater": {
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDdGMzdFQTU4RjY0NkMyNjAKUldSZ3drYjJXT28zZnlkR2VrcnVIUDc1dmZaYXBFc21PQkduNUtIRENXMEhRTzFXVWhPWmdMMUYK",
@@ -70,7 +70,7 @@
       "desktop": {
         "schemes": [
           "matrix",
-          "prinny"
+          "bestie"
         ]
       }
     }

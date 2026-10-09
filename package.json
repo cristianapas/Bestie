@@ -1,7 +1,7 @@
 {
-  "name": "cinny",
+  "name": "bestie",
   "version": "4.11.11",
-  "description": "Yet another matrix client",
+  "description": "Bestie - Matrix client",
   "main": "index.js",
   "engines": {
     "node": ">=16.0.0"
