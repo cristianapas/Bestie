@@ -629,7 +629,6 @@ Object.assign(esFeatures.settings.about, {
   update_to_version: 'Actualizar a v{{version}}',
   up_to_date: 'Actualizado',
   retry_update_check: 'Reintentar comprobación',
-  prinny_is_hard_fork: 'Bestie Client es un fork de',
   bestie_is_hard_fork: 'Bestie Client es un fork de',
   and: 'y',
   packaged_with: ', empaquetado con',
@@ -1295,6 +1294,204 @@ patchFile(path.join(FRONTEND_DIR, 'src', 'app', 'features', 'settings', 'general
   (code) => code.replace(/\{': '\}Full day name/, `{\`: \${t('features:settings.general.full_day_name', { defaultValue: 'Full day name' })}\`}`),
   (code) => code.replace('<Text size="B400">Save</Text>', `<Text size="B400">{t('features:settings.general.save', { defaultValue: 'Save' })}</Text>`),
   (code) => code.replace('title="Date Format"', `title={t('features:settings.general.date_format', { defaultValue: 'Date Format' })}`),
+]);
+
+// AF. WelcomePage.tsx - Ensure clean native welcome page, no "what's new" Changelog
+patchFile(path.join(FRONTEND_DIR, 'src', 'app', 'pages', 'client', 'WelcomePage.tsx'), [
+  (code) => {
+    if (!code.includes('Changelog')) return code;
+    return `import React from 'react';
+import { Box, Text, config, toRem } from 'folds';
+import { useTranslation } from 'react-i18next';
+import { Page, PageHero, PageHeroSection } from '../../components/page';
+import BestieSVG from '../../../../public/res/svg/bestie.svg';
+
+export function WelcomePage() {
+  const { t } = useTranslation();
+
+  return (
+    <Page>
+      <Box
+        grow="Yes"
+        style={{ padding: config.space.S400, paddingBottom: config.space.S700 }}
+        alignItems="Center"
+        justifyContent="Center"
+      >
+        <PageHeroSection>
+          <PageHero
+            icon={<img width="80" height="80" src={BestieSVG} alt="Bestie Logo" />}
+            title="Bienvenido a Bestie"
+            subTitle={
+              <span>
+                Cliente Matrix rápido, moderno y seguro
+              </span>
+            }
+          >
+            <Box justifyContent="Center">
+              <Box grow="Yes" style={{ maxWidth: toRem(360) }} direction="Column" gap="300">
+                <Text size="T300" priority="300" style={{ textAlign: 'center' }}>
+                  {t('pages:client.select_chat_to_start', {
+                    defaultValue: 'Selecciona una conversación o inicia un chat nuevo para comenzar.',
+                  })}
+                </Text>
+              </Box>
+            </Box>
+          </PageHero>
+        </PageHeroSection>
+      </Box>
+    </Page>
+  );
+}
+`;
+  },
+]);
+
+// AG. Direct Messages / Direct.tsx
+patchFile(path.join(FRONTEND_DIR, 'src', 'app', 'pages', 'client', 'direct', 'Direct.tsx'), [
+  (code) => code.replace('Direct Messages', 'Mensajes directos'),
+  (code) => code.replace('Show unread only', 'Mostrar solo no leídos'),
+  (code) => code.replace('No Direct Messages', 'Sin mensajes directos'),
+  (code) => code.replace('You do not have any direct messages yet.', 'Aún no tienes ningún mensaje directo.'),
+  (code) => code.replace('Direct Message', 'Mensaje directo'),
+]);
+
+// AH. Explore / Explore.tsx
+patchFile(path.join(FRONTEND_DIR, 'src', 'app', 'pages', 'client', 'explore', 'Explore.tsx'), [
+  (code) => code.replace('<Text size="B400">Add Server</Text>', '<Text size="B400">Agregar servidor</Text>'),
+  (code) => code.replace(/<Text size="H4" truncate>\s*Explore Community\s*<\/Text>/, '<Text size="H4" truncate>Explorar comunidad</Text>'),
+  (code) => code.replace(/<Text as="span" size="Inherit" truncate>\s*Featured\s*<\/Text>/, '<Text as="span" size="Inherit" truncate>Destacados</Text>'),
+  (code) => code.replace(/<Text size="L400">Servers<\/Text>/, '<Text size="L400">Servidores</Text>'),
+  (code) => code.replace(/<Text size="H3" truncate>\s*Add Server\s*<\/Text>/, '<Text size="H3" truncate>Agregar servidor</Text>'),
+  (code) => code.replace('placeholder="example.com"', 'placeholder="ejemplo.com"'),
+  (code) => code.replace('<Text size="B400">Add</Text>', '<Text size="B400">Agregar</Text>'),
+  (code) => code.replace('Add to List', 'Agregar a la lista'),
+  (code) => code.replace('Browse Without Adding', 'Explorar sin agregar'),
+  (code) => code.replace('Remove Server', 'Eliminar servidor'),
+]);
+
+// AI. Explore / Featured.tsx
+patchFile(path.join(FRONTEND_DIR, 'src', 'app', 'pages', 'client', 'explore', 'Featured.tsx'), [
+  (code) => code.replace('title="Featured Communities"', 'title="Comunidades destacadas"'),
+  (code) => code.replace('subTitle="Hand-picked spaces and rooms — or browse the public room directory of any Matrix server."', 'subTitle="Espacios y salas seleccionados, o explora el directorio público de cualquier servidor Matrix."'),
+  (code) => code.replace('<Text size="B400">Browse public servers</Text>', '<Text size="B400">Explorar servidores públicos</Text>'),
+  (code) => code.replace('Around 1,150 servers, merged daily from asra.gr, joinmatrix.org and\n                      privacydev.net.', 'Alrededor de 1.150 servidores, recopilados diariamente de asra.gr, joinmatrix.org y\n                      privacydev.net.'),
+  (code) => code.replace('<Text size="H4">Featured Spaces</Text>', '<Text size="H4">Espacios destacados</Text>'),
+  (code) => code.replace('<Text size="H4">Featured Rooms</Text>', '<Text size="H4">Salas destacadas</Text>'),
+  (code) => code.replace('No rooms or spaces are currently featured.', 'Actualmente no hay salas ni espacios destacados.'),
+]);
+
+// AJ. Explore / Server.tsx
+patchFile(path.join(FRONTEND_DIR, 'src', 'app', 'pages', 'client', 'explore', 'Server.tsx'), [
+  (code) => code.replace("title: 'All'", "title: 'Todo'"),
+  (code) => code.replace("title: 'Spaces'", "title: 'Espacios'"),
+  (code) => code.replace("title: 'Rooms'", "title: 'Salas'"),
+  (code) => code.replace('<Text size="L400">Search</Text>', '<Text size="L400">Buscar</Text>'),
+  (code) => code.replace('placeholder="Search for keyword"', 'placeholder="Buscar por palabra clave"'),
+  (code) => code.replace('<Text size="B300">Clear</Text>', '<Text size="B300">Limpiar</Text>'),
+  (code) => code.replace('<Text size="B300">Enter</Text>', '<Text size="B300">Buscar</Text>'),
+  (code) => code.replace('<Text style={{ padding: config.space.S100 }} size="L400" truncate>\n                Protocols\n              </Text>', '<Text style={{ padding: config.space.S100 }} size="L400" truncate>\n                Protocolos\n              </Text>'),
+  (code) => code.replace('<Text size="L400">Presets</Text>', '<Text size="L400">Predefinidos</Text>'),
+  (code) => code.replace('<Text size="L400">Custom Limit</Text>', '<Text size="L400">Límite personalizado</Text>'),
+  (code) => code.replace('aria-label="Per Page Item Limit"', 'aria-label="Límite por página"'),
+  (code) => code.replace('<Text size="B300">Change Limit</Text>', '<Text size="B300">Cambiar límite</Text>'),
+  (code) => code.replace('{`Page Limit: ${limit}`}', '{`Límite: ${limit}`}'),
+  (code) => code.replace('<Text size="H3" truncate>\n                Search\n              </Text>', '<Text size="H3" truncate>\n                Buscar\n              </Text>'),
+  (code) => code.replace('<Text size="H4">{`Results for "${serverSearchParams.term}"`}</Text>', '<Text size="H4">{`Resultados para "${serverSearchParams.term}"`}</Text>'),
+  (code) => code.replace('<Text size="H4">Popular Communities</Text>', '<Text size="H4">Comunidades populares</Text>'),
+  (code) => code.replace('Previous Page', 'Página anterior'),
+  (code) => code.replace('Next Page', 'Página siguiente'),
+  (code) => code.replace('No communities found!', '¡No se encontraron comunidades!'),
+]);
+
+// AK. Inbox / Inbox.tsx
+patchFile(path.join(FRONTEND_DIR, 'src', 'app', 'pages', 'client', 'inbox', 'Inbox.tsx'), [
+  (code) => code.replace('<Text as="span" size="Inherit" truncate>\n                Invites\n              </Text>', '<Text as="span" size="Inherit" truncate>\n                Invitaciones\n              </Text>'),
+  (code) => code.replace('<Text size="H4" truncate>\n              Inbox\n            </Text>', '<Text size="H4" truncate>\n              Bandeja de entrada\n            </Text>'),
+  (code) => code.replace('<Text as="span" size="Inherit" truncate>\n                        All\n                      </Text>', '<Text as="span" size="Inherit" truncate>\n                        Todo\n                      </Text>'),
+  (code) => code.replace('<Text as="span" size="Inherit" truncate>\n                        Notifications\n                      </Text>', '<Text as="span" size="Inherit" truncate>\n                        Notificaciones\n                      </Text>'),
+]);
+
+// AL. Inbox / All.tsx
+patchFile(path.join(FRONTEND_DIR, 'src', 'app', 'pages', 'client', 'inbox', 'All.tsx'), [
+  (code) => code.replace('title="All"', 'title="Todo"'),
+  (code) => code.replace('<Text size="H4">Invites</Text>', '<Text size="H4">Invitaciones</Text>'),
+]);
+
+// AM. Inbox / Notifications.tsx
+patchFile(path.join(FRONTEND_DIR, 'src', 'app', 'pages', 'client', 'inbox', 'Notifications.tsx'), [
+  (code) => code.replace("title = 'Notification Messages'", "title = 'Mensajes de notificación'"),
+  (code) => code.replace('<Text size="T200">Mark as Read</Text>', '<Text size="T200">Marcar como leído</Text>'),
+  (code) => code.replace('<Text size="T200">Open</Text>', '<Text size="T200">Abrir</Text>'),
+  (code) => code.replace('<Text size="L400">Filter</Text>', '<Text size="L400">Filtro</Text>'),
+  (code) => code.replace('<Text size="T200">All Notifications</Text>', '<Text size="T200">Todas las notificaciones</Text>'),
+  (code) => code.replace('<Text size="T200">Highlighted</Text>', '<Text size="T200">Menciones</Text>'),
+  (code) => code.replace('aria-label="Scroll to Top"', 'aria-label="Ir arriba"'),
+  (code) => code.replace('<Text>No Notifications</Text>', '<Text>Sin notificaciones</Text>'),
+  (code) => code.replace("You don&apos;t have any new notifications to display yet.", 'Aún no tienes notificaciones nuevas para mostrar.'),
+]);
+
+// AN. Inbox / Invites.tsx
+patchFile(path.join(FRONTEND_DIR, 'src', 'app', 'pages', 'client', 'inbox', 'Invites.tsx'), [
+  (code) => code.replace('<Text size="L400">Encrypted</Text>', '<Text size="L400">Cifrado</Text>'),
+  (code) => code.replace('<Text size="L400">Direct Message</Text>', '<Text size="L400">Mensaje directo</Text>'),
+  (code) => code.replace('<Text size="L400">Space</Text>', '<Text size="L400">Espacio</Text>'),
+  (code) => code.replace('<Text size="B300">Decline</Text>', '<Text size="B300">Rechazar</Text>'),
+  (code) => code.replace('<Text size="B300">Accept</Text>', '<Text size="B300">Aceptar</Text>'),
+  (code) => code.replace('From: <b>{invite.senderId}</b>', 'De: <b>{invite.senderId}</b>'),
+  (code) => code.replace('Reason: {invite.reason}', 'Motivo: {invite.reason}'),
+  (code) => code.replace('<Text size="T200">All</Text>', '<Text size="T200">Todo</Text>'),
+  (code) => code.replace('<Text size="T200">Primary</Text>', '<Text size="T200">Principal</Text>'),
+  (code) => code.replace('<Text size="T200">Public</Text>', '<Text size="T200">Público</Text>'),
+  (code) => code.replace('<Text size="T200">Spam</Text>', '<Text size="T200">Spam</Text>'),
+  (code) => code.replace('<Text size="H4">Primary</Text>', '<Text size="H4">Principal</Text>'),
+  (code) => code.replace('title="No Invites"\n              subTitle="When someone you share a room with sends you an invite, it’ll show up here."', 'title="Sin invitaciones"\n              subTitle="Cuando alguien con quien compartes una sala te envíe una invitación, aparecerá aquí."'),
+  (code) => code.replace('<Text size="H4">Public</Text>', '<Text size="H4">Público</Text>'),
+  (code) => code.replace('<Text size="T200">Decline All</Text>', '<Text size="T200">Rechazar todas</Text>'),
+  (code) => code.replace('title="No Invites"\n              subTitle="Invites from people outside your rooms will appear here."', 'title="Sin invitaciones"\n              subTitle="Las invitaciones de personas fuera de tus salas aparecerán aquí."'),
+  (code) => code.replace('title={`${invites.length} Spam Invites`}', 'title={`${invites.length} invitaciones marcadas como spam`}'),
+  (code) => code.replace('subTitle="Some of the following invites may contain harmful content or have been sent by banned users."', 'subTitle="Algunas de las siguientes invitaciones pueden contener contenido dañino o haber sido enviadas por usuarios bloqueados."'),
+  (code) => code.replace('Decline All', 'Rechazar todas'),
+  (code) => code.replace('Report All', 'Reportar todas'),
+  (code) => code.replace('Block All', 'Bloquear todos'),
+  (code) => code.replace("{showInvites ? 'Hide All' : 'View All'}", "{showInvites ? 'Ocultar todas' : 'Ver todas'}"),
+  (code) => code.replace('title="No Spam Invites"', 'title="Sin invitaciones no deseadas"'),
+  (code) => code.replace('subTitle="Invites detected as spam appear here."', 'subTitle="Las invitaciones detectadas como spam aparecerán aquí."'),
+  (code) => code.replace('title="No Invites"\n              subTitle="Invites to rooms and spaces will show up here."', 'title="Sin invitaciones"\n              subTitle="Las invitaciones a salas y espacios aparecerán aquí."'),
+  (code) => code.replace('<Text size="H3" truncate>\n              Invites\n            </Text>', '<Text size="H3" truncate>\n              Invitaciones\n            </Text>'),
+]);
+
+// AO. Nav / DirectsNav.tsx
+patchFile(path.join(FRONTEND_DIR, 'src', 'app', 'pages', 'client', 'nav', 'DirectsNav.tsx'), [
+  (code) => code.replace('Create Chat', 'Crear chat'),
+]);
+
+// AP. Nav / RoomsNav.tsx
+patchFile(path.join(FRONTEND_DIR, 'src', 'app', 'pages', 'client', 'nav', 'RoomsNav.tsx'), [
+  (code) => code.replace('Create Room', 'Crear sala'),
+  (code) => code.replace('Join with Address', 'Unirse con dirección'),
+  (code) => code.replace('Message Search', 'Buscar mensajes'),
+  (code) => code.replace('<Text size="H4" truncate>\n              Rooms\n            </Text>', '<Text size="H4" truncate>\n              Salas\n            </Text>'),
+]);
+
+// AQ. Nav / NavMenuItems.tsx
+patchFile(path.join(FRONTEND_DIR, 'src', 'app', 'pages', 'client', 'nav', 'NavMenuItems.tsx'), [
+  (code) => code.replace('Mark as Read', 'Marcar como leído'),
+]);
+
+// AR. TopBar.tsx
+patchFile(path.join(FRONTEND_DIR, 'src', 'app', 'pages', 'client', 'TopBar.tsx'), [
+  (code) => code.replace('aria-label="Inbox"', 'aria-label="Bandeja de entrada"'),
+  (code) => code.replace('<Tooltip>Inbox</Tooltip>', '<Tooltip>Bandeja de entrada</Tooltip>'),
+]);
+
+// AS. Home.tsx & Rooms.tsx
+patchFile(path.join(FRONTEND_DIR, 'src', 'app', 'pages', 'client', 'home', 'Home.tsx'), [
+  (code) => code.replace('No Direct Messages', 'Sin mensajes directos'),
+  (code) => code.replace('You do not have any direct messages yet.', 'Aún no tienes ningún mensaje directo.'),
+]);
+patchFile(path.join(FRONTEND_DIR, 'src', 'app', 'pages', 'client', 'rooms', 'Rooms.tsx'), [
+  (code) => code.replace('No Rooms', 'Sin salas'),
+  (code) => code.replace('You do not have any rooms yet.', 'Aún no tienes ninguna sala.'),
 ]);
 
 console.log('\n🎉 ¡Parche integral completado con éxito!');
